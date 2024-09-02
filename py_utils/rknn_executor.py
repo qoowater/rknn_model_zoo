@@ -1,5 +1,7 @@
-from rknn.api import RKNN
-
+try:
+    from rknn.api import RKNN
+except:
+    from rknnlite.api import RKNNLite as RKNN
 
 class RKNN_model_container():
     def __init__(self, model_path, target=None, device_id=None) -> None:
@@ -12,7 +14,7 @@ class RKNN_model_container():
         if target==None:
             ret = rknn.init_runtime()
         else:
-            ret = rknn.init_runtime(target=target, device_id=device_id)
+            ret = rknn.init_runtime( core_mask=RKNN.NPU_CORE_0)
         if ret != 0:
             print('Init runtime environment failed')
             exit(ret)

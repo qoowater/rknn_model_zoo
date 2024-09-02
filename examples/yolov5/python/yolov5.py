@@ -259,7 +259,7 @@ if __name__ == '__main__':
         else:
             input_data = img
 
-        outputs = model.run([input_data])
+        outputs = model.run([np.expand_dims(input_data, 0)])
         boxes, classes, scores = post_process(outputs, anchors)
 
         if args.img_show or args.img_save:
